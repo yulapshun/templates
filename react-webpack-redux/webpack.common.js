@@ -1,5 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: [
@@ -20,9 +20,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'sass-loader']
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -30,7 +34,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {from: 'public'}
     ]),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'bundle.css',
       allChunks: true
     })
