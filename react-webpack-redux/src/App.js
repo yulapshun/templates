@@ -9,12 +9,10 @@ const store = createStore(
   {}
 );
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <div>template</div>
-      </Provider>
-    );
-  }
+export default function(props) {
+  return (
+    <Provider store={store}>
+      <div>template</div>
+    </Provider>
+  );
 }
